@@ -1,6 +1,6 @@
 type E164Number = string;
 import PhoneInput from "react-phone-number-input";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -12,9 +12,10 @@ const SendVerification = () => {
   const [value, setValue] = useState<E164Number | undefined>();
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
-  const auth = useSelector((state: RootState) => state.auth);
+  const { authStatus, userData } = useSelector(
+    (state: RootState) => state.auth
+  );
   const sendVerificationCode = useSendVerificationCode();
-  console.log(auth);
 
   const handleVerification = async () => {
     if (value) {
@@ -31,6 +32,15 @@ const SendVerification = () => {
       setIsLoading(false);
     }
   };
+
+  useEffect(() => {
+    if (!authStatus) {
+      navigate("..");
+    }
+    if (userData?.phoneVerified) {
+      navigate("..");
+    }
+  }, []);
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center">

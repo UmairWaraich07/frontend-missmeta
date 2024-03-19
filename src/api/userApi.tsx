@@ -4,10 +4,16 @@ import api from "./api";
 const registerUser = async ({ userData, role }: IRegisterUser) => {
   console.log(userData);
   try {
-    const response = await api.post(`/users/register-${role}`, {
-      ...userData,
-      role,
-    });
+    const response = await api.post(
+      `/users/register-${role}`,
+      {
+        ...userData,
+        role,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     return response.data;
   } catch (error) {
@@ -17,11 +23,17 @@ const registerUser = async ({ userData, role }: IRegisterUser) => {
 
 const loginUser = async ({ username, email, password }: ILoginUser) => {
   try {
-    const response = await api.post(`/users/login`, {
-      username,
-      email,
-      password,
-    });
+    const response = await api.post(
+      `/users/login`,
+      {
+        username,
+        email,
+        password,
+      },
+      {
+        withCredentials: true,
+      }
+    );
 
     return response.data;
   } catch (error) {
@@ -32,9 +44,15 @@ const loginUser = async ({ username, email, password }: ILoginUser) => {
 const updatePhoneVerification = async (phone: string) => {
   console.log(phone);
   try {
-    const response = await api.patch(`/users/update-phone`, {
-      phone: phone,
-    });
+    const response = await api.patch(
+      `/users/update-phone`,
+      {
+        phone: phone,
+      },
+      {
+        withCredentials: true,
+      }
+    );
     return response.data;
   } catch (error) {
     console.log(`Error on updating the phone verification status : ${error}`);
