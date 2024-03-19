@@ -8,7 +8,9 @@ export interface RootState {
 }
 
 const store = configureStore({
-  reducer: authReducer,
+  reducer: {
+    auth: authReducer,
+  },
 });
 
 export { store };

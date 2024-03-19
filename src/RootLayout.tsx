@@ -11,7 +11,7 @@ export default function RootLayout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { authStatus, userData } = useSelector(
-    (state: RootState) => state.auth
+    (state: RootState) => state?.auth
   );
   console.log(userData);
 
