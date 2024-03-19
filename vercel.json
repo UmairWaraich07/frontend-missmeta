@@ -1,3 +1,8 @@
 {
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "https://missmeta-backend.vercel.app/api/$1"
+    }
+  ]
 }
