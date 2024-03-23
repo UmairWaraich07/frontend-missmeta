@@ -6,6 +6,7 @@ import { login, logout } from "./store/authSlice";
 import "../src/styles/theme.css";
 import { checkSubscription } from "./api/stripeApi";
 import { RootState } from "./store/store";
+import { Button } from "./components/ui/button";
 
 export default function RootLayout() {
   const navigate = useNavigate();
@@ -52,12 +53,17 @@ export default function RootLayout() {
   };
 
   return (
-    <div className="background-light850_dark100 relative">
+    <div className="background-light850_dark100 relative flex flex-between ">
       <h1 className="text-4xl underline">
-        {authStatus ? "Welcome back, " : "Guest user, please login"}
-        Home
+        {authStatus
+          ? `Welcome back, ${userData?.username}`
+          : "Guest user, please login"}
       </h1>
-      {authStatus && <button onClick={handleLogout}>Log out</button>}
+      {authStatus && (
+        <Button className="bg-dark-100 text-white" onClick={handleLogout}>
+          Log out
+        </Button>
+      )}
       {<Outlet />}
     </div>
   );

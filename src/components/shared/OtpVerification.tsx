@@ -1,10 +1,13 @@
+import { updateUserData } from "@/store/authSlice";
 import { useUpdatePhoneVerification } from "@/tanstack/userQueries";
 import { useVerifyOtp } from "@/tanstack/verificationQueries";
 import { useState, useRef, ChangeEvent, KeyboardEvent, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
 
 const OtpVerification = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const location = useLocation();
   const phone = location.state?.phone;
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
@@ -61,6 +64,8 @@ const OtpVerification = () => {
         if (response?.data.phoneVerified) {
           console.log("User phone number verified successfully");
 
+          // update the user state in the authSlice
+          dispatch(updateUserData(response.data));
           response.data.role === "voter"
             ? navigate("/", { replace: true })
             : navigate("/payment", { replace: true });

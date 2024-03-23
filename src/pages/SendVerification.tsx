@@ -21,6 +21,7 @@ const SendVerification = () => {
     if (value) {
       setIsLoading(true);
       const response = await sendVerificationCode.mutateAsync(value);
+      console.log("response", response);
 
       if (response?.success) {
         console.log("OTP Has been sent", response);
