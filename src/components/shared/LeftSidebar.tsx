@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Logo } from ".";
 import { LeftbarLinks } from "@/constants";
 import { Button } from "../ui/button";
@@ -46,8 +46,6 @@ const LeftsidebarContent = () => {
 };
 
 const LeftSidebar = () => {
-  const { pathname } = useLocation();
-  const navigate = useNavigate();
   const { authStatus } = useSelector((state: RootState) => state.auth);
 
   return (

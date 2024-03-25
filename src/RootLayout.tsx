@@ -6,6 +6,7 @@ import { login, logout } from "./store/authSlice";
 import { checkSubscription } from "./api/stripeApi";
 import { RootState } from "./store/store";
 import { Bottombar, LeftSidebar, Topbar } from "./components/shared";
+import { Button } from "./components/ui/button";
 
 export default function RootLayout() {
   const navigate = useNavigate();
@@ -55,6 +56,11 @@ export default function RootLayout() {
     <div className="bg-light-850 min-h-screen w-full md:flex relative  ">
       <Topbar />
       <LeftSidebar />
+      {authStatus && (
+        <Button className="bg-dark-100 text-white" onClick={handleLogout}>
+          Log out
+        </Button>
+      )}
       <main className="flex flex-1 h-full ">{<Outlet />}</main>
       <Bottombar />
     </div>

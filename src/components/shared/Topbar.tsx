@@ -1,10 +1,8 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Logo } from ".";
 import Avatar from "./Avatar";
 
 const Topbar = () => {
-  const navigate = useNavigate();
-
   return (
     <header className="topbar bg-white">
       <div className="flex-between p-4">

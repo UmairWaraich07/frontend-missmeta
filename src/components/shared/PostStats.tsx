@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 
 interface PostStatsProps {
   postId?: string;
@@ -8,18 +7,17 @@ interface PostStatsProps {
   isExplorePage?: boolean;
 }
 
-const PostStats = ({
-  postId,
-  userId,
-  totalComments,
-  isExplorePage = false,
-}: PostStatsProps) => {
+const PostStats = ({ isExplorePage = false }: PostStatsProps) => {
   const [isSaved, setIsSaved] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
 
-  const handleLike = async () => {};
+  const handleLike = async () => {
+    setIsLiked(true);
+  };
 
-  const handleSaved = async () => {};
+  const handleSaved = async () => {
+    setIsSaved(true);
+  };
 
   return (
     <div
