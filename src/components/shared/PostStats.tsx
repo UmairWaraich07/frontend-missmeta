@@ -3,13 +3,15 @@ import { useState } from "react";
 interface PostStatsProps {
   postId?: string;
   userId?: string;
+  post: any;
   totalComments?: number;
   isExplorePage?: boolean;
 }
 
-const PostStats = ({ isExplorePage = false }: PostStatsProps) => {
-  const [isSaved, setIsSaved] = useState(false);
-  const [isLiked, setIsLiked] = useState(false);
+const PostStats = ({ isExplorePage = false, post }: PostStatsProps) => {
+  const [isSaved, setIsSaved] = useState(post?.post.isSaved);
+  const [isLiked, setIsLiked] = useState(post?.post.isLiked);
+  console.log(post?.post.isSaved);
 
   const handleLike = async () => {
     setIsLiked(true);
@@ -39,7 +41,7 @@ const PostStats = ({ isExplorePage = false }: PostStatsProps) => {
             className="cursor-pointer"
             onClick={handleLike}
           />
-          <p className="small-medium lg:base-medium">570</p>
+          <p className="small-medium lg:base-medium">{post?.post.likesCount}</p>
         </div>
       </div>
 

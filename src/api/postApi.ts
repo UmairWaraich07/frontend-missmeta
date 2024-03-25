@@ -13,7 +13,7 @@ const getGuestFeedPosts = async () => {
 
 const getFeedPosts = async () => {
   try {
-    const response = await api.get(`/api/v1/posts/guest-posts`, {
+    const response = await api.get(`/api/v1/posts/feed-posts`, {
       withCredentials: true,
     });
 

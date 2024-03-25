@@ -47,7 +47,7 @@ const PostCard = (post: any) => {
         <Carousel media={post?.post.media} />
       </div>
 
-      <PostStats />
+      <PostStats post={post} />
     </div>
   );
 };
