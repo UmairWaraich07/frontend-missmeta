@@ -5,7 +5,7 @@ const registerUser = async ({ userData, role }: IRegisterUser) => {
   console.log(userData);
   try {
     const response = await api.post(
-      `/users/register-${role}`,
+      `/api/v1/users/register-${role}`,
       {
         ...userData,
         role,
@@ -24,7 +24,7 @@ const registerUser = async ({ userData, role }: IRegisterUser) => {
 const loginUser = async ({ username, email, password }: ILoginUser) => {
   try {
     const response = await api.post(
-      `/users/login`,
+      `/api/v1/users/login`,
       {
         username,
         email,
@@ -45,7 +45,7 @@ const updatePhoneVerification = async (phone: string) => {
   console.log(phone);
   try {
     const response = await api.patch(
-      `/users/update-phone`,
+      `/api/v1/users/update-phone`,
       {
         phone: phone,
       },
@@ -61,7 +61,7 @@ const updatePhoneVerification = async (phone: string) => {
 
 const getCurrentUser = async () => {
   try {
-    const response = await api.get(`/users/current-user`);
+    const response = await api.get(`/api/v1/users/current-user`);
 
     return response.data;
   } catch (error) {
@@ -71,7 +71,7 @@ const getCurrentUser = async () => {
 
 const logoutUser = async () => {
   try {
-    const response = await api.post(`/users/logout`);
+    const response = await api.post(`/api/v1/users/logout`);
     return response.data;
   } catch (error) {
     console.log(`Error on logging out the user : ${error}`);

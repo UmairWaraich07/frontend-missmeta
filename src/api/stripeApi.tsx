@@ -3,7 +3,7 @@ import api from "./api";
 const stripeCheckoutSession = async () => {
   try {
     const response = await api.post(
-      `/subscriptions/subscribe`,
+      `/api/v1/subscriptions/subscribe`,
       {},
       {
         withCredentials: true,
@@ -16,7 +16,7 @@ const stripeCheckoutSession = async () => {
 };
 const checkSubscription = async () => {
   try {
-    const response = await api.get(`/subscriptions/check`, {
+    const response = await api.get(`/api/v1/subscriptions/check`, {
       withCredentials: true,
     });
     return response.data;

@@ -44,36 +44,38 @@ const SendVerification = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center">
-      <h4 className="text-dark font-inter font-medium">
-        For registeration, we need to verify your phone number
-      </h4>
-      <div className="flex items-center justify-center mt-3">
-        <PhoneInput
-          international
-          countryCallingCodeEditable={false}
-          defaultCountry="US"
-          value={value}
-          onChange={setValue}
-          // className="p-1 border border-light/20 rounded"
-        />
-      </div>
-
-      {sendVerificationCode.isError && (
-        <div className="text-red-600">
-          An error occurred: {sendVerificationCode.error.message}
+    <section className="min-h-screen flex flex-col items-center justify-center bg-light-800 p-6">
+      <div className="shadow-md rounded-lg px-12 py-14 max-sm:px-8 max-sm:py-10 bg-white">
+        <h4 className="base-medium text-center">
+          To continue, we need to verify your phone number
+        </h4>
+        <div className="flex items-center justify-center mt-10">
+          <PhoneInput
+            international
+            countryCallingCodeEditable={false}
+            defaultCountry="US"
+            value={value}
+            onChange={setValue}
+            className="py-1 px-4 border-[1.5px] rounded border-gray/40"
+          />
         </div>
-      )}
 
-      <Button
-        className="mt-6"
-        disabled={isLoading}
-        onClick={handleVerification}
-      >
-        {" "}
-        Send Verification Code{" "}
-      </Button>
-    </div>
+        {sendVerificationCode.isError && (
+          <div className="text-red">
+            An error occurred: {sendVerificationCode.error.message}
+          </div>
+        )}
+
+        <Button
+          className="mt-6 primary-gradient w-full !text-light-900 gap-1.5"
+          disabled={isLoading}
+          onClick={handleVerification}
+        >
+          {" "}
+          Send Verification Code{" "}
+        </Button>
+      </div>
+    </section>
   );
 };
 

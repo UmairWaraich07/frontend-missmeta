@@ -3,10 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getCurrentUser, logoutUser } from "./api/userApi";
 import { login, logout } from "./store/authSlice";
-import "../src/styles/theme.css";
 import { checkSubscription } from "./api/stripeApi";
 import { RootState } from "./store/store";
-import { Button } from "./components/ui/button";
+import { Bottombar, LeftSidebar, Topbar } from "./components/shared";
 
 export default function RootLayout() {
   const navigate = useNavigate();
@@ -53,8 +52,17 @@ export default function RootLayout() {
   };
 
   return (
-    <div className="background-light850_dark100 relative flex flex-between ">
-      <h1 className="text-4xl underline">
+    <div className="bg-light-850 min-h-screen w-full md:flex relative  ">
+      <Topbar />
+      <LeftSidebar />
+      <main className="flex flex-1 h-full ">{<Outlet />}</main>
+      <Bottombar />
+    </div>
+  );
+}
+
+{
+  /* <h1 className="text-4xl underline">
         {authStatus
           ? `Welcome back, ${userData?.username}`
           : "Guest user, please login"}
@@ -63,8 +71,5 @@ export default function RootLayout() {
         <Button className="bg-dark-100 text-white" onClick={handleLogout}>
           Log out
         </Button>
-      )}
-      {<Outlet />}
-    </div>
-  );
+      )} */
 }

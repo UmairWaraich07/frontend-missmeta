@@ -10,11 +10,14 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+
 import { contestantRegisterSchema } from "@/lib/validations";
 import { Input } from "@/components/ui/input";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../../api/userApi.js";
 import { useRegisterUser } from "@/tanstack/userQueries.js";
+import Options from "@/components/shared/Options.js";
+import { eyeColorOptions, hairColorOptions } from "@/constants/options.js";
 
 const ContestantRegisterForm = ({ role }: { role: string }) => {
   const navigate = useNavigate();
@@ -64,19 +67,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Email <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Email <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="email"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Email"
-                    {...field}
-                  />
+                  <Input type="email" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -85,19 +83,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="fullname"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Fullname <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Fullname <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Full Name"
-                    {...field}
-                  />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -106,19 +99,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Username <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Username <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Email"
-                    {...field}
-                  />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -127,19 +115,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Password <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Password <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Password"
-                    {...field}
-                  />
+                  <Input type="password" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -148,19 +131,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="dateOfBirth"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Date of Birth <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Date of Birth <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="date"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Date of Birth"
-                    {...field}
-                  />
+                  <Input type="date" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -169,19 +147,12 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="nationality"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Nationality
-                </FormLabel>
+                <FormLabel className="shad-form_label">Nationality</FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Nationality"
-                    {...field}
-                  />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="text-primary-500" />
               </FormItem>
             )}
           />
@@ -190,19 +161,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="country"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Country <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Country <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Country"
-                    {...field}
-                  />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -212,19 +178,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="state"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  State <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  State <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="State"
-                    {...field}
-                  />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -234,19 +195,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="city"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  City <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  City <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="City"
-                    {...field}
-                  />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -256,19 +212,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="height"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Height in cm <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Height in cm <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="number"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Height"
-                    {...field}
-                  />
+                  <Input type="number" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -277,19 +228,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="weight"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Weight in kg <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Weight in kg <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="number"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Weight"
-                    {...field}
-                  />
+                  <Input type="number" className="shad-input" {...field} />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -298,19 +244,18 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="eyeColor"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Eye Color <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Eye Color <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Eye Color"
-                    {...field}
+                  <Options
+                    options={eyeColorOptions}
+                    handleChange={field.onChange}
+                    placeholder="Select your eye color"
                   />
                 </FormControl>
 
-                <FormMessage className="text-red-600" />
+                <FormMessage className="shad-form_message" />
               </FormItem>
             )}
           />
@@ -319,15 +264,14 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             name="hairColor"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-dark font-semibold">
-                  Hair Color <span className="text-red-600">*</span>
+                <FormLabel className="shad-form_label">
+                  Hair Color <span className="text-primary-500">*</span>
                 </FormLabel>
                 <FormControl>
-                  <Input
-                    type="text"
-                    className="px-4 py-2 focus:outline-none focus-visible:ring-offset-0 focus-visible:ring-0 border-2 border-dark  bg-light text-dark rounded-md "
-                    placeholder="Hair Color"
-                    {...field}
+                  <Options
+                    options={hairColorOptions}
+                    placeholder="Select your hair color"
+                    handleChange={field.onChange}
                   />
                 </FormControl>
 
@@ -336,18 +280,26 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
             )}
           />
           {registerUser.isError && (
-            <div className="text-red-600">
+            <div className="text-red">
               An error occurred: {registerUser.error.message}
             </div>
           )}
 
-          <Button type="submit">Register</Button>
+          <Button
+            type="submit"
+            className="primary-gradient w-full !text-light-900 gap-1.5"
+          >
+            Register
+          </Button>
         </form>
       </Form>
 
-      <div className="text-center mt-6 text-dark">
+      <div className="text-center mt-6 text-dark-100">
         Already have an account?{" "}
-        <Link to="/login" className="text-gold hover:underline font-medium">
+        <Link
+          to="/login"
+          className="text-primary-500 hover:underline font-medium"
+        >
           Login now
         </Link>
       </div>

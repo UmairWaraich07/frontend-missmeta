@@ -4,6 +4,12 @@ export interface ILoginUser {
   password: string;
 }
 
+export type NavLinkTypes = {
+  imgURL: string;
+  route: string;
+  label: string;
+};
+
 export interface IUserData {
   _id: string;
   city: string;

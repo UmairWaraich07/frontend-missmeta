@@ -4,7 +4,7 @@ const sendVerificationCode = async (phoneNumber: string) => {
   console.log("INSIDE SEND VERIFY CODE", phoneNumber);
   try {
     const response = await api.post(
-      `/verifications/send-otp`,
+      `/api/v1/verifications/send-otp`,
       {
         phoneNumber: phoneNumber,
       },
@@ -21,7 +21,7 @@ const sendVerificationCode = async (phoneNumber: string) => {
 const verifyOtp = async (otpCode: string) => {
   try {
     const response = await api.post(
-      `/verifications/verify-otp`,
+      `/api/v1/verifications/verify-otp`,
       {
         otpCode: otpCode,
       },

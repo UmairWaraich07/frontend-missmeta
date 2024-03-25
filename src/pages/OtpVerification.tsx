@@ -4,6 +4,8 @@ import { useVerifyOtp } from "@/tanstack/verificationQueries";
 import { useState, useRef, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Button } from "../components/ui/button";
+import { Logo } from "../components/shared";
 
 const OtpVerification = () => {
   const navigate = useNavigate();
@@ -86,50 +88,61 @@ const OtpVerification = () => {
   };
 
   return (
-    <div className="bg-white shadow-md rounded px-8 py-6 mt-10">
-      <h2 className="text-center text-2xl font-bold mb-4">OTP Verification</h2>
-      <div className="flex justify-center items-center">
-        {otp.map((digit, index) => (
-          <input
-            key={index}
-            ref={inputRefs[index]}
-            type="text"
-            className="w-10 h-10 text-center text-3xl border border-gray-300 rounded mx-1 focus:outline-none focus:border-blue-500"
-            value={digit}
-            onChange={(e: ChangeEvent<HTMLInputElement>) =>
-              handleInputChange(index, e.target.value)
-            }
-            onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
-              handleKeyDown(index, e)
-            }
-            maxLength={1}
-          />
-        ))}
+    <section className="min-h-screen flex flex-col gap-8 items-center justify-center bg-light-800 p-6">
+      <Logo />
+      <div className=" shadow-md rounded-lg px-12 py-14 max-sm:px-8 max-sm:py-10 bg-white">
+        <h2 className="text-center text-3xl max-sm:text-2xl font-bold">
+          Verify your phone number
+        </h2>
+        <p className="text-gray text-center mt-2 max-sm:text-sm">
+          Enter the 6 digit OTP sent to your phone number.
+        </p>
+        <div className="flex justify-center items-center mt-10 gap-2 max-sm:gap-1">
+          {otp.map((digit, index) => (
+            <input
+              key={index}
+              ref={inputRefs[index]}
+              type="text"
+              className="w-14 h-14 max-sm:w-10 max-sm:h-10 text-center text-3xl border-gray/30 border-[1.5px] rounded mx-1 focus:border-[1.5px] focus:outline-none focus:border-primary-500/50"
+              value={digit}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                handleInputChange(index, e.target.value)
+              }
+              onKeyDown={(e: KeyboardEvent<HTMLInputElement>) =>
+                handleKeyDown(index, e)
+              }
+              maxLength={1}
+            />
+          ))}
+        </div>
+
+        <p className="mt-4">
+          Did not receive a code?{" "}
+          <button className="text-primary-500 font-medium">Resend</button>
+        </p>
+
+        {verifyOtp.isError && (
+          <div className="text-red mt-2">
+            An error occurred: {verifyOtp.error.message}
+          </div>
+        )}
+        {updatePhoneVerification.isError && (
+          <div className="text-red mt-2">
+            An error occurred: {updatePhoneVerification.error.message}
+          </div>
+        )}
+
+        <Button
+          onClick={handleOtp}
+          type="submit"
+          disabled={isLoading}
+          className="mt-6 primary-gradient w-full !text-light-900 gap-1.5"
+        >
+          Verify OTP
+        </Button>
+        <p className="mt-4 text-red">Don't share the OTP with anyone!</p>
       </div>
-      <p className="text-sm text-gray-500 mt-2">
-        Enter the 6-digit OTP sent to your mobile number.
-      </p>
-
-      {verifyOtp.isError && (
-        <div className="text-red-600">
-          An error occurred: {verifyOtp.error.message}
-        </div>
-      )}
-      {updatePhoneVerification.isError && (
-        <div className="text-red-600">
-          An error occurred: {updatePhoneVerification.error.message}
-        </div>
-      )}
-
-      <button
-        onClick={handleOtp}
-        type="submit"
-        disabled={isLoading}
-        className="mt-4 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-      >
-        Verify OTP
-      </button>
-    </div>
+    </section>
   );
 };
 

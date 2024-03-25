@@ -1,8 +1,8 @@
 import logo from "../../assets/nobackleonardo.png";
 
-const Logo = ({ width = 60 }) => {
+const Logo = ({ width = 68 }) => {
   return (
-    <div className="flex items-center text-dark">
+    <div className={`flex items-center text-dark-100 w-[${width}px]`}>
       <img
         src={logo}
         alt="Logo"
@@ -11,8 +11,8 @@ const Logo = ({ width = 60 }) => {
         height={width}
       />
 
-      <p className="h3-bold font-spaceGrotesk text-dark-100 dark:text-light-900 max-sm:hidden cursor-pointer">
-        Miss Meta <span className="text-primary-500">Universe</span>
+      <p className="text-2xl max-sm:text-xl font-bold text-dark-100 dark:text-light-900 cursor-pointer">
+        Miss<span className="text-primary-500">Meta</span>
       </p>
     </div>
   );

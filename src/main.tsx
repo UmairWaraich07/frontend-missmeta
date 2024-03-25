@@ -15,8 +15,16 @@ import RootLayout from "./RootLayout";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import BeforeRegister from "./auth/BeforeRegister";
-import { SendVerification, SubscriptionCard } from "./pages";
-import OtpVerification from "./components/shared/OtpVerification";
+import {
+  AllContestants,
+  CreatePost,
+  Explore,
+  Home,
+  OtpVerification,
+  Profile,
+  SendVerification,
+  SubscriptionCard,
+} from "./pages";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -29,8 +37,11 @@ const router = createBrowserRouter(
       <Route path="/payment" element={<SubscriptionCard />} />
 
       <Route path="/" element={<RootLayout />}>
-        <Route path="dashboard" element={<h1>Dashboard</h1>} />
-        <Route path="about" element={<h1>Dashboard</h1>} />
+        <Route index element={<Home />} />
+        <Route path="explore" element={<Explore />} />
+        <Route path="all-contestants" element={<AllContestants />} />
+        <Route path="create-post" element={<CreatePost />} />
+        <Route path=":username" element={<Profile />} />
       </Route>
     </>
   )

@@ -19,11 +19,12 @@ const config: Config = {
     extend: {
       colors: {
         primary: {
+          400: "#C07D2A",
           500: "#FF7000",
           100: "#FFF1E6",
         },
         dark: {
-          100: "#000000",
+          100: "#1b1b1b",
           200: "#0F1117",
           300: "#151821",
           400: "#212734",
@@ -38,6 +39,8 @@ const config: Config = {
           400: "#858EAD",
         },
         "accent-blue": "#1DA1F2",
+        gray: "#747474",
+        red: "#FF5A5A",
       },
       fontFamily: {
         inter: ["Inter", "sans-serif"],

@@ -7,6 +7,7 @@ import { useLogoutUser } from "@/tanstack/userQueries";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import tick from "../assets/tick-circle.svg";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -25,12 +26,15 @@ const Header = () => {
   return (
     <header
       className="flex-between background-light900_dark200 w-full 
-        gap-5 p-4 shadow-light-300 dark:shadow-none sm:px-12"
+        gap-5 p-2 px-6 dark:shadow-none sm:px-12 bg-white shadow-light-100"
     >
       <Logo />
 
       <div>
-        <Button onClick={handleLogout} className="font-medium text-lg">
+        <Button
+          onClick={handleLogout}
+          className="font-medium text-lg max-sm:text-base"
+        >
           Sign Out
         </Button>
       </div>
@@ -61,35 +65,46 @@ const SubscriptionCard = () => {
   }, []);
 
   return (
-    <div className="w-full min-h-screen ">
+    <div className="w-full min-h-screen bg-light-800 pb-10">
       <Header />
-      <div className="mt-12 flex items-center justify-center">
-        <div className="bg-white rounded-lg shadow-lg overflow-hidden max-w-sm mx-auto text-center">
-          <div className="px-6 py-4">
-            <h2 className="text-xl font-bold text-gray-800">
-              Become a Miss Meta Universe Contestant
-            </h2>
-            <p className="text-gray-600 mt-2">
-              Unlock exclusive features and increase your chance of being
-              discovered!
-            </p>
-            <ul className="list-disc mt-4 text-gray-700">
-              <li>Upload photos and videos to showcase your talents.</li>
-              <li>Gain access to valuable coaching and resources.</li>
-              <li>Get noticed by brands and companies seeking influencers.</li>
-            </ul>
-            <div className="mt-6 flex justify-between items-center">
-              <span className="text-lg font-semibold text-gray-800">
-                One-time Fee: $100
-              </span>
-              <button
-                type="button"
-                className="px-4 py-2 rounded-md bg-indigo-600 text-white font-bold shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50"
-                onClick={handleStripSubscription}
-              >
-                Subscribe Now
-              </button>
-            </div>
+      <div
+        className="mt-10 max-w-[400px] shadow-light-100 rounded-lg m-auto flex items-center justify-center
+       bg-white text-center px-8 py-10"
+      >
+        <div className="">
+          <h2 className="text-2xl font-semibold">
+            Become a Miss Meta Universe Contestant
+          </h2>
+          <p className="text-gray mt-4 font-inter">
+            Unlock exclusive features and increase your chance of being
+            discovered!
+          </p>
+          <ul className=" mt-6 text-gray font-inter space-y-4">
+            <li className="flex items-start gap-1 text-[15px]">
+              <img src={tick} alt="tick" width={24} height={24} /> Upload photos
+              and videos to showcase your talents.
+            </li>
+            <li className="flex items-start text-[15px]">
+              <img src={tick} alt="tick" width={24} height={24} />
+              Gain access to valuable coaching and resources.
+            </li>
+            <li className="flex items-start text-[15px]">
+              <img src={tick} alt="tick" width={24} height={24} />
+              Get noticed by brands and companies seeking influencers.
+            </li>
+          </ul>
+          <div className="mt-10 flex justify-between items-center">
+            <span className="text-lg font-medium text-dark-100">
+              <span className=" text-2xl font-extrabold">$</span>
+              <span className="text-4xl font-extrabold">100</span>/year
+            </span>
+            <Button
+              type="button"
+              className="px-4 py-2 rounded-md primary-gradient text-white font-semibold disabled:opacity-50"
+              onClick={handleStripSubscription}
+            >
+              Subscribe Now
+            </Button>
           </div>
         </div>
       </div>
