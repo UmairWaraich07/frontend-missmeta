@@ -13,7 +13,6 @@ const OtpVerification = () => {
   const location = useLocation();
   const phone = location.state?.phone;
   const [otp, setOtp] = useState(["", "", "", "", "", ""]);
-  const [isLoading, setisLoading] = useState(false);
   const updatePhoneVerification = useUpdatePhoneVerification();
   const verifyOtp = useVerifyOtp();
 
@@ -52,9 +51,11 @@ const OtpVerification = () => {
   }, [navigate]);
 
   const handleOtp = async () => {
-    setisLoading(true);
     try {
-      const response = await verifyOtp.mutateAsync(otp.join(""));
+      const response = await verifyOtp.mutateAsync({
+        otpCode: otp.join(""),
+        phone: location.state?.phone,
+      });
       console.log("handle OTP", response);
 
       if (response?.success) {
@@ -72,17 +73,15 @@ const OtpVerification = () => {
             ? navigate("/", { replace: true })
             : navigate("/payment", { replace: true });
         } else {
-          // navigate("..");
-          setisLoading(false);
+          navigate("..");
+          throw new Error("Phone number updation failed");
         }
       } else {
-        setisLoading(false);
         throw new Error("Otp verification failed");
       }
     } catch (error) {
       console.log(`Error while handling otp,  ${error}`);
       setOtp(["", "", "", "", "", ""]);
-      setisLoading(false);
       throw new Error("Otp verification failed");
     }
   };
@@ -135,7 +134,7 @@ const OtpVerification = () => {
         <Button
           onClick={handleOtp}
           type="submit"
-          disabled={isLoading}
+          disabled={verifyOtp.isPending}
           className="mt-6 primary-gradient w-full !text-light-900 gap-1.5"
         >
           Verify OTP

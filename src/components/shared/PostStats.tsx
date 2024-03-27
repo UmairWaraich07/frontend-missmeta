@@ -1,4 +1,9 @@
+import { RootState } from "@/store/store";
+import { useGetPostLikesCount, useToggleLike } from "@/tanstack/likeQueries";
+import { useToggleSaved } from "@/tanstack/savedQueries";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 interface PostStatsProps {
   postId?: string;
@@ -9,26 +14,55 @@ interface PostStatsProps {
 }
 
 const PostStats = ({ isExplorePage = false, post }: PostStatsProps) => {
-  const [isSaved, setIsSaved] = useState(post?.post.isSaved);
-  const [isLiked, setIsLiked] = useState(post?.post.isLiked);
-  console.log(post?.post.isSaved);
+  const [isSaved, setIsSaved] = useState(post?.isSaved);
+  const [isLiked, setIsLiked] = useState(post?.isLiked);
+  const { authStatus } = useSelector((state: RootState) => state.auth);
+  const navigate = useNavigate();
+  const toggleLike = useToggleLike();
+  const toggleSaved = useToggleSaved();
+  const { data: likesCount, isPending } = useGetPostLikesCount(post?._id);
 
   const handleLike = async () => {
-    setIsLiked(true);
+    if (!authStatus) {
+      navigate("/login?message=you need to login first");
+    }
+    setIsLiked(!isLiked);
+
+    const response = await toggleLike.mutateAsync({ postId: post._id });
+    console.log(response);
+    if (response) {
+      console.log("Like toggled successfully");
+    }
+    if (toggleLike.isError) {
+      setIsLiked(false);
+    }
   };
 
   const handleSaved = async () => {
-    setIsSaved(true);
+    if (!authStatus) {
+      navigate("/login?message=you need to login first");
+    }
+    setIsSaved(!isSaved);
+
+    const response = await toggleSaved.mutateAsync({ postId: post._id });
+    console.log(response);
+    if (response) {
+      console.log("Saved toggled successfully");
+    }
+    if (toggleSaved.isError) {
+      console.log(toggleSaved.error.message);
+      setIsLiked(false);
+    }
   };
 
   return (
     <div
       className={`${
         !isExplorePage && "w-full"
-      } flex justify-between  gap-2 items-center z-20 `}
+      } flex justify-between  gap-2 mt-3 items-center z-20 max-xs:px-4 `}
     >
       <div className="flex items-center w-full gap-4">
-        <div className="flex gap-2">
+        <div className="flex items-center gap-2">
           <img
             src={`${
               isLiked
@@ -41,7 +75,7 @@ const PostStats = ({ isExplorePage = false, post }: PostStatsProps) => {
             className="cursor-pointer"
             onClick={handleLike}
           />
-          <p className="small-medium lg:base-medium">{post?.post.likesCount}</p>
+          <p className="body-medium lg:base-medium">{likesCount}</p>
         </div>
       </div>
 

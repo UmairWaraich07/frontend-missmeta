@@ -1,0 +1,15 @@
+export enum QUERY_KEYS {
+  GET_FEED_POSTS = "feedposts",
+  GET_GUEST_POSTS = "guestposts",
+  GET_POSTS = "posts",
+  GET_CURRENT_USER = "currentUser",
+  GET_POST_LIKES = "postLikes",
+  GET_CHECK_LIKED = "checkLiked",
+  GET_POST_COMMENTS = "comments",
+  GET_POST = "post",
+  GET_USERS = "users",
+  GET_USER_LIKED_POSTS = "likedPosts",
+  GET_USER_SAVED_POSTS = "savedPosts",
+  GET_MORE_USER_POSTS = "morePosts",
+  GET_POST_LIKES_COUNT = "likesCount",
+}

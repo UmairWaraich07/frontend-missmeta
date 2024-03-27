@@ -18,10 +18,13 @@ import { loginUser } from "../../api/userApi.js";
 import { useRegisterUser } from "@/tanstack/userQueries.js";
 import Options from "@/components/shared/Options.js";
 import { eyeColorOptions, hairColorOptions } from "@/constants/options.js";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/authSlice.js";
 
 const ContestantRegisterForm = ({ role }: { role: string }) => {
   const navigate = useNavigate();
   const registerUser = useRegisterUser();
+  const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof contestantRegisterSchema>>({
     resolver: zodResolver(contestantRegisterSchema),
@@ -48,7 +51,8 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
       const { username, email, password } = values;
 
       const response = await loginUser({ username, email, password });
-
+      // update the auth status in redux store
+      dispatch(login(response?.data.user));
       if (response?.success) {
         console.log("USER LOGGED IN", response.data);
         navigate("/verify");
@@ -288,6 +292,7 @@ const ContestantRegisterForm = ({ role }: { role: string }) => {
           <Button
             type="submit"
             className="primary-gradient w-full !text-light-900 gap-1.5"
+            disabled={registerUser.isPending}
           >
             Register
           </Button>

@@ -4,6 +4,14 @@ export interface ILoginUser {
   password: string;
 }
 
+export interface ICodeVerification {
+  phone: string;
+  otpCode: string;
+}
+export interface IPhoneVerification {
+  phone: string;
+  channel: string;
+}
 export type NavLinkTypes = {
   imgURL: string;
   route: string;

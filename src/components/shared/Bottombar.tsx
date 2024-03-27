@@ -23,7 +23,9 @@ const Bottombar = () => {
               height={16}
               alt={link.label}
             />
-            <p className="tiny-medium text-dark-200">{link.label}</p>
+            <p className="tiny-medium text-center text-dark-200">
+              {link.label}
+            </p>
           </NavLink>
         );
       })}

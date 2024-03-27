@@ -102,6 +102,7 @@ const SubscriptionCard = () => {
               type="button"
               className="px-4 py-2 rounded-md primary-gradient text-white font-semibold disabled:opacity-50"
               onClick={handleStripSubscription}
+              disabled={stripeCheckoutSession.isPending}
             >
               Subscribe Now
             </Button>

@@ -21,7 +21,9 @@ import {
   Explore,
   Home,
   OtpVerification,
+  PostDetails,
   Profile,
+  ProtectedRoute,
   SendVerification,
   SubscriptionCard,
 } from "./pages";
@@ -32,15 +34,51 @@ const router = createBrowserRouter(
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/registerchoice" element={<BeforeRegister />} />
-      <Route path="/verify" element={<SendVerification />} />
-      <Route path="/verify/otp" element={<OtpVerification />} />
-      <Route path="/payment" element={<SubscriptionCard />} />
+      <Route
+        path="/verify"
+        element={
+          <ProtectedRoute authentication={true}>
+            <SendVerification />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/verify/otp"
+        element={
+          <ProtectedRoute authentication={true}>
+            <OtpVerification />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/payment"
+        element={
+          <ProtectedRoute authentication={true}>
+            <SubscriptionCard />
+          </ProtectedRoute>
+        }
+      />
 
       <Route path="/" element={<RootLayout />}>
         <Route index element={<Home />} />
+        <Route
+          path="p/:postId"
+          element={
+            <ProtectedRoute authentication={true}>
+              <PostDetails />
+            </ProtectedRoute>
+          }
+        />
         <Route path="explore" element={<Explore />} />
         <Route path="all-contestants" element={<AllContestants />} />
-        <Route path="create-post" element={<CreatePost />} />
+        <Route
+          path="create-post"
+          element={
+            <ProtectedRoute authentication={true}>
+              <CreatePost />
+            </ProtectedRoute>
+          }
+        />
         <Route path=":username" element={<Profile />} />
       </Route>
     </>

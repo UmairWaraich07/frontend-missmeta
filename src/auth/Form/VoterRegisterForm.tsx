@@ -15,10 +15,13 @@ import { voterRegisterSchema } from "@/lib/validations";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "@/api/userApi";
 import { useRegisterUser } from "@/tanstack/userQueries";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/authSlice";
 
 const VoterRegisterForm = ({ role }: { role: string }) => {
   const navigate = useNavigate();
   const registerUser = useRegisterUser();
+  const dispatch = useDispatch();
 
   const form = useForm<z.infer<typeof voterRegisterSchema>>({
     resolver: zodResolver(voterRegisterSchema),
@@ -44,7 +47,8 @@ const VoterRegisterForm = ({ role }: { role: string }) => {
       const { username, email, password } = values;
 
       const response = await loginUser({ username, email, password });
-
+      // after logging the user in dispatch their info
+      dispatch(login(response?.data.user));
       if (response?.success) {
         console.log("USER LOGGED IN", response.data);
         navigate("/verify");
@@ -212,6 +216,7 @@ const VoterRegisterForm = ({ role }: { role: string }) => {
           <Button
             type="submit"
             className="primary-gradient w-full !text-light-900 gap-1.5"
+            disabled={registerUser.isPending}
           >
             Register
           </Button>

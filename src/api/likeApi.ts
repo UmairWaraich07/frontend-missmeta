@@ -3,7 +3,7 @@ import api from "./api";
 const toggleLike = async (postId: string) => {
   try {
     const response = await api.post(
-      `/api/v1/likes/${postId}`,
+      `/api/v1/likes/toggle/${postId}`,
       {},
       {
         withCredentials: true,
@@ -27,6 +27,16 @@ const getUserLikedPosts = async () => {
   }
 };
 
+const getPostLikesCount = async (postId: string) => {
+  try {
+    const response = await api.get(`/api/v1/likes/p/likes/${postId}`, {
+      withCredentials: true,
+    });
+    return response.data.data;
+  } catch (error) {
+    console.log(`Error on getting the post likes count, ${error}`);
+  }
+};
 const getPostLikes = async (postId: string) => {
   try {
     const response = await api.get(`/api/v1/likes/p/${postId}`, {
@@ -38,4 +48,4 @@ const getPostLikes = async (postId: string) => {
   }
 };
 
-export { toggleLike, getUserLikedPosts, getPostLikes };
+export { toggleLike, getUserLikedPosts, getPostLikes, getPostLikesCount };

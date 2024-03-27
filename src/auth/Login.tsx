@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { loginSchema } from "@/lib/validations";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useSearchParams } from "react-router-dom";
 import { Logo } from "@/components/shared";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "@/store/authSlice";
@@ -24,6 +24,11 @@ const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const loginUser = useLoginUser();
+  const [searchParams] = useSearchParams();
+  const message = searchParams.get("message");
+  const redirectTo = searchParams.get("redirectTo");
+  console.log({ redirectTo });
+
   const { userData } = useSelector((state: RootState) => state.auth);
   const { data: subscriptionStatus } = useCheckSubscription(userData?._id);
 
@@ -39,7 +44,7 @@ const Login = () => {
     const { email, password } = values;
 
     const response = await loginUser.mutateAsync({ email, password });
-
+    console.log({ response });
     if (response?.success) {
       // store the data in redux
       const user = response.data?.user;
@@ -55,7 +60,9 @@ const Login = () => {
             navigate("/payment");
           }
         } else {
-          navigate("/");
+          redirectTo
+            ? navigate(redirectTo, { replace: true })
+            : navigate("/", { replace: true });
         }
       }
     }
@@ -70,7 +77,7 @@ const Login = () => {
           Login to your account
         </div>
         <p className="text-gray dark:text-light/80 text-base mt-2 text-center">
-          Welcome back! Please enter your details
+          {message ? message : "Welcome back! Please enter your details"}
         </p>
         <Form {...form}>
           <form
@@ -115,9 +122,13 @@ const Login = () => {
                 </FormItem>
               )}
             />
+            {loginUser.isError && (
+              <p className="text-red"> {loginUser.error.message} </p>
+            )}
             <Button
               type="submit"
               className="primary-gradient w-full !text-light-900 gap-1.5"
+              disabled={loginUser.isPending}
             >
               Login
             </Button>

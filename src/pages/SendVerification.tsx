@@ -9,28 +9,27 @@ import { useSendVerificationCode } from "@/tanstack/verificationQueries";
 import { RootState } from "@/store/store";
 
 const SendVerification = () => {
-  const [value, setValue] = useState<E164Number | undefined>();
-  const [isLoading, setIsLoading] = useState(false);
+  const [phone, setPhone] = useState<E164Number | undefined>();
   const navigate = useNavigate();
   const { authStatus, userData } = useSelector(
     (state: RootState) => state.auth
   );
   const sendVerificationCode = useSendVerificationCode();
 
-  const handleVerification = async () => {
-    if (value) {
-      setIsLoading(true);
-      const response = await sendVerificationCode.mutateAsync(value);
-      console.log("response", response);
+  const handleVerification = async (channel: string) => {
+    if (!phone) return;
 
-      if (response?.success) {
-        console.log("OTP Has been sent", response);
-        navigate("otp", {
-          state: { phone: value },
-        });
-      }
+    const response = await sendVerificationCode.mutateAsync({
+      phone,
+      channel,
+    });
+    console.log("response", response);
 
-      setIsLoading(false);
+    if (response?.success) {
+      console.log("OTP Has been sent", response);
+      navigate("otp", {
+        state: { phone: phone },
+      });
     }
   };
 
@@ -54,8 +53,8 @@ const SendVerification = () => {
             international
             countryCallingCodeEditable={false}
             defaultCountry="US"
-            value={value}
-            onChange={setValue}
+            value={phone}
+            onChange={setPhone}
             className="py-1 px-4 border-[1.5px] rounded border-gray/40"
           />
         </div>
@@ -66,14 +65,25 @@ const SendVerification = () => {
           </div>
         )}
 
-        <Button
-          className="mt-6 primary-gradient w-full !text-light-900 gap-1.5"
-          disabled={isLoading}
-          onClick={handleVerification}
-        >
-          {" "}
-          Send Verification Code{" "}
-        </Button>
+        <div className="mt-6 flex-center gap-4 max-sm:gap-2">
+          <Button
+            className="primary-gradient !text-light-900 gap-1.5"
+            disabled={sendVerificationCode.isPending}
+            onClick={() => handleVerification("sms")}
+          >
+            {" "}
+            Send code via SMS
+          </Button>
+
+          <Button
+            className="primary-text-gradient font-semibold text-base max-sm:text-sm"
+            disabled={sendVerificationCode.isPending}
+            onClick={() => handleVerification("whatsapp")}
+          >
+            {" "}
+            Send code via Whatsapp
+          </Button>
+        </div>
       </div>
     </section>
   );

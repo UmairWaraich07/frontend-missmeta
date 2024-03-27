@@ -53,6 +53,10 @@
     background: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
   }
 
+  .color-primary-gradient {
+    color: linear-gradient(129deg, #ff7000 0%, #e2995f 100%);
+  }
+
   .dark-gradient {
     background: linear-gradient(
       232deg,
@@ -88,6 +92,18 @@
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.border-primary-gradient {
+  border-width: 2px; /* Set the width of the border */
+  border-style: solid; /* Set the border style to solid */
+  border-image: linear-gradient(
+    129deg,
+    #ff7000,
+    #e2995f
+  ); /* Apply linear gradient as border image */
+  border-image-slice: 1; /* Set the border image slice to 1 to cover the entire border */
+  border-radius: 10px;
 }
 
 .custom-scrollbar::-webkit-scrollbar {
@@ -335,7 +351,7 @@
 
 @layer utilities {
   .common-container {
-    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 pb-28 px-5 md:px-8 lg:p-14 custom-scrollbar;
+    @apply flex flex-col flex-1 items-center gap-10 overflow-scroll py-10 pb-28 max-xs:px-0 px-4 md:px-8 lg:p-14 custom-scrollbar;
   }
 
   /* All Users */
@@ -366,7 +382,7 @@
   }
 
   .home-posts {
-    @apply max-w-[550px] flex flex-col items-center w-full gap-6 md:gap-9;
+    @apply max-w-[468px] flex flex-col items-center w-full gap-6 md:gap-9;
   }
 
   .home-creators {
@@ -383,19 +399,19 @@
 
   /* Post Details */
   .post_details-container {
-    @apply flex flex-col flex-1 gap-10 overflow-scroll py-10 pb-28 px-5 md:p-14 custom-scrollbar items-center;
+    @apply flex flex-col flex-1 gap-10 max-sm:gap-0 overflow-scroll py-10 pb-28 px-5 max-sm:px-0 custom-scrollbar items-center;
   }
 
   .post_details-card {
-    @apply bg-dark-200 w-full max-w-5xl rounded-[30px] flex-col flex xl:flex-row border border-dark-4 xl:rounded-l-[24px];
+    @apply bg-light-900 w-full max-w-4xl rounded flex-col flex md:flex-row border border-dark-400/30;
   }
 
   .post_details-img {
-    @apply h-80 lg:h-[480px] xl:h-[580px] xl:w-[48%] rounded-t-[30px] xl:rounded-l-[24px] xl:rounded-tr-none object-cover p-5 bg-dark-100;
+    @apply h-[550px] xl:h-[580px] md:max-w-[482px] w-full rounded-tr-none rounded-br-none object-cover bg-light-900;
   }
 
   .post_details-info {
-    @apply bg-dark-200 flex flex-col gap-5 lg:gap-3 flex-1 items-start p-6 rounded-[30px];
+    @apply bg-light-900 flex max-lg:w-[50%] max-md:w-full flex-col justify-between gap-5 lg:gap-3 flex-1 items-start;
   }
 
   .post_details-delete_btn {
@@ -422,7 +438,7 @@
 
   /* Bottom bar */
   .bottom-bar {
-    @apply z-50 flex-between w-full fixed bottom-0 bg-light-900 px-5 py-2 md:hidden;
+    @apply z-50 flex-between w-full fixed bottom-0 bg-light-900 px-4 py-2 sm:hidden;
   }
 
   /* File uploader */
@@ -462,16 +478,19 @@
 
   /* Post Card */
   .post-card {
-    @apply bg-light-900 w-full max-w-[550px];
+    @apply bg-light-900 w-full max-w-[468px];
   }
 
   .post-card_img {
-    @apply h-64 xs:h-[400px] lg:h-[450px] w-full rounded object-cover mb-5;
+    @apply h-[480px] xs:h-[550px] lg:h-[570px] w-full max-w-[100%] rounded object-cover mb-5;
   }
+  /* .post-card_video {
+    @apply h-[480px] xs:h-[550px] lg:h-[570px] w-full max-w-[100%] rounded object-cover mb-5;
+  } */
 
   /* Topbar */
   .topbar {
-    @apply sticky top-0 z-50 md:hidden bg-light-900 w-full;
+    @apply sticky top-0 z-50 sm:hidden bg-light-900 w-full border-b light-border-2;
   }
 
   /* User card */
@@ -511,4 +530,14 @@
   .shad-button_ghost {
     @apply flex gap-4 items-center justify-start hover:bg-transparent hover:text-white !important;
   }
+}
+
+.video-container {
+  position: relative;
+  width: 585px; /* Fixed width for large devices */
+}
+
+.video-container video {
+  width: 100%; /* Ensure video fills the container horizontally */
+  height: calc(585px * (16 / 9)); /* Calculate height based on aspect ratio */
 }
